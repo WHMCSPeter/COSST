@@ -29,9 +29,8 @@ class Frontend {
 					echo '<h3 class="panel-title"><strong>'.$row['title'].'</strong></h3>';
 					echo '</div>';
 					echo '<div class="panel-body">';
-					echo '<p><span class="label label-default" style="float: right;">'.$date.'</span></p>';
 					echo '<p>'.$row['short_article'].'</p>';
-					echo ' <span style="float: right;" class="btn btn-sm btn-default"><a href="./news/'.$row['slug'].'">Read More</a></span>';
+					echo '<p><span class="label label-default">'.$date.'</span><span style="float: right;" class="btn btn-sm btn-default"><a href="./news/'.$row['slug'].'">Read More</a></span></p>';
 					echo '</div>';
 					echo '</div>';
 				}

@@ -21,7 +21,7 @@ if(!LOGGED_IN) {
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4 col-md-offset-4" style="text-align: center">
-        	<h1>Dashboard</h1>
+        	<h1><?php echo $lang['title_dashboard']; ?></h1>
         </div>
       </div>
 
@@ -39,8 +39,9 @@ if(!LOGGED_IN) {
         <div class="col-md-3">
         	<h2>Latest News</h2><hr>
             <?php
-			echo $frontend->dashboardNews();
+				echo $frontend->dashboardNews();
 			?>
+            <p style="float:right"><a href="./news">More News &raquo;</a></p>
             <!-- <p><strong>First News Article</strong> - <a href="">Read More</a><br />
             Something interesting would be written here... It may even need a "read more" button.</p>
             <hr>

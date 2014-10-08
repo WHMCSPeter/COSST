@@ -30,6 +30,7 @@ $lang = array(
 	'button_ticketresolved' => 'Mark as Resolved',
 	'modal_ticketresolved' => 'Are you sure you\'d like to mark this ticket as Resolved? This cannot be undone and you will no longer be able to reply to this ticket. You will have to open a new ticket if you require further assistance.',
 	'button_cancel' => 'Cancel',
-	'message_ticketresolved' => 'Marked as Resolved'
+	'message_ticketresolved' => 'Marked as Resolved',
+	'title_dashboard' => 'Dashboard'
 	
 );
