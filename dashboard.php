@@ -28,16 +28,15 @@ if(!LOGGED_IN) {
       <hr>
       
       <div class="row">
-      	<div class="col-md-3">
-        	<h2>Something</h2><hr>
+      	<div class="col-md-6">
+        	<h2 class="page-header">Welcome, <?php echo $user_name; ?>.</h2>
+            <p>This is some paragraph text.</p>
+            <h3 class="page-header">What do you want to do?</h3>
+            <p><button class="btn btn-lg btn-primary">First Link</button></p>
         </div>
         
-        <div class="col-md-3">
-        	<h2>Something else</h2><hr>
-        </div>
-        
-        <div class="col-md-3">
-        	<h2>Latest News</h2><hr>
+        <div class="col-md-6">
+        	<h2 class="page-header">Latest News</h2>
             <?php
 				echo $frontend->dashboardNews();
 			?>
@@ -47,13 +46,6 @@ if(!LOGGED_IN) {
             <hr>
             <p><strong>First News Article</strong> - <a href="">Read More</a><br />
             Something interesting would be written here... It may even need a "read more" button.</p> -->
-        </div>
-        
-        <div class="col-md-3">
-        	<h2>Actions</h2><hr>
-            <a class="btn btn-lg btn-default">View Your Tickets</a><br><br>
-            <a class="btn btn-lg btn-default">Open a Ticket</a><br><br>
-            <a class="btn btn-lg btn-default">Edit Your Account</a>
         </div>
       </div>
       
