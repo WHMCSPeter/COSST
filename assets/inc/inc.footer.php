@@ -1,0 +1,1 @@
+<p>&copy; <?php echo date('Y').' '.$company; ?> <span style="float: right;">Powered by <a href="http://www.cosst.co.uk">COSST</a>.</span></p>

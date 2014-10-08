@@ -1,0 +1,26 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.nav-name{
+	color: #777;
+	font-weight: bold;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-right: 15px;
+}
+
+.nav-name span {
+	color: #FFF;
+}
+
+td a {
+	font-weight: bold;
+}
+
+.panel-heading span {
+	padding: 7px 15px;
+	float: right;
+}
