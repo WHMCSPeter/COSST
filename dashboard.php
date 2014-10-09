@@ -30,9 +30,13 @@ if(!LOGGED_IN) {
       <div class="row">
       	<div class="col-md-6">
         	<h2 class="page-header">Welcome, <?php echo $user_name; ?>.</h2>
-            <p>This is some paragraph text.</p>
+            <p><?php echo $lang['dashboard_text']; ?></p>
             <h3 class="page-header">What do you want to do?</h3>
-            <p><button class="btn btn-lg btn-primary">First Link</button></p>
+            <p>
+            	<a href="./open"><button class="btn btn-lg btn-primary">Open a Ticket</button></a>
+                <a href="./tickets"><button class="btn btn-lg btn-primary">View Tickets</button></a>
+                <a href="./account"><button class="btn btn-lg btn-primary">Edit Your Account</button></a>
+            </p>
         </div>
         
         <div class="col-md-6">
@@ -40,12 +44,7 @@ if(!LOGGED_IN) {
             <?php
 				echo $frontend->dashboardNews();
 			?>
-            <p style="float:right"><a href="./news">More News &raquo;</a></p>
-            <!-- <p><strong>First News Article</strong> - <a href="">Read More</a><br />
-            Something interesting would be written here... It may even need a "read more" button.</p>
-            <hr>
-            <p><strong>First News Article</strong> - <a href="">Read More</a><br />
-            Something interesting would be written here... It may even need a "read more" button.</p> -->
+            <p style="float:right"><a href="./news"><?php echo $lang['link_morenews']; ?></a></p>
         </div>
       </div>
       

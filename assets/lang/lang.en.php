@@ -1,4 +1,10 @@
 <?php
+//***************************************//
+// English Language File By Peter Bishop //
+//  www.lostnerd.uk | peter@lostnerd.uk  //
+//***************************************//
+
+//HTML is acceptable in this file to allow for cosmetic changes. If you must use a ' in the file, make sure to use a \ (e.g. He\'s)
 $lang = array(
 
 	'placeholder_email' => 'Email',
@@ -31,6 +37,10 @@ $lang = array(
 	'modal_ticketresolved' => 'Are you sure you\'d like to mark this ticket as Resolved? This cannot be undone and you will no longer be able to reply to this ticket. You will have to open a new ticket if you require further assistance.',
 	'button_cancel' => 'Cancel',
 	'message_ticketresolved' => 'Marked as Resolved',
-	'title_dashboard' => 'Dashboard'
+	'title_dashboard' => 'Dashboard',
+	'link_morenews' => 'More News &raquo;',
+	
+	//Dashboard Main Paragraph Text - On it's own as it could be huge!
+	'dashboard_text' => 'Using this new open source support ticketing software, we are able to provide top quality support 24 hours a day, 7 days a week. <strong>Feel free to update this text in the language file under "dashboard_text".</strong>'
 	
 );
