@@ -49,5 +49,35 @@ class Frontend {
 			return $row[$col];
 		}
 	}
+	
+	function listDepartments() {
+		global $MySQLi;
+		$query = "SELECT * FROM departments WHERE hidden = '0' ORDER BY name";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve departments. Please contact support.");
+		}
+		else
+		{
+			while($row = $commit->fetch_assoc()) {
+				echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+			}
+		}
+	}
+	
+	function listPriorities() {
+		global $MySQLi;
+		$query = "SELECT * FROM priorities WHERE hidden = '0'";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve priorities. Please contact support.");
+		}
+		else
+		{
+			while($row = $commit->fetch_assoc()) {
+				echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+			}
+		}
+	}
 }
 ?>
