@@ -95,6 +95,7 @@ if(!LOGGED_IN) {
             </form>
         </div>
       </div>
+      </div>
     
       
       <hr>
