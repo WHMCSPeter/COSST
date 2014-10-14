@@ -141,5 +141,43 @@ class Core {
 		$hash = md5(strtolower(trim($email)));
 		return $hash;
 	}
+	
+	function createTicket($uid1 = '', $did1 = '', $status1 = '', $subject1 = '', $msg1 = '', $ip1 = '') {
+		global $MySQLi;
+		$uid = $this->EscapeString($uid1);
+		$did = $this->EscapeString($did1);
+		$status = $this->EscapeString($status1);
+		$subject = $this->EscapeString($subject1);
+		$msg = $this->EscapeString($msg1);
+		$ip = $this->EscapeString($ip1);
+		$host = $this->EscapeString(gethostbyaddr($ip));
+		$datetime = date('Y-m-d H:i:s');
+		$tid = $this->generateRandomLetters(3).'-'.$this->generateRandomNumbers(6);
+		$query = "INSERT INTO `tickets` (`ticket_id`, `user_id`, `dept_id`, `status`, `subject`, `initial_message`, `sent_ip`, `sent_host`, `created`, `last_updated`) VALUES ('".$tid."', '".$uid."', '".$did."', '".$status."', '".$subject."', '".$msg."', '".$ip."', '".$host."', '".$datetime."', '".$datetime."')";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			return false;
+		}
+		else
+		{
+			$row = array(
+				'ticket_id' => ''.$tid.'',
+				'subject' => ''.$subject.''
+			);
+			
+			return $row;
+		}
+	}
+	
+	function maintenanceModeCheck() {
+		$check = $this->Setting('maintenance_mode');
+		if($check == 1) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 ?>

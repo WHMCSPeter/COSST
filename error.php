@@ -8,3 +8,4 @@ no_tid = TID not specified whilst updating ticket.
 update_ownership = Do not own ticket trying to edit
 status_update_fail = Could not update ticket status.
 ticket_reply_fail = Failed to add reply to db.
+createticket = Issue creating ticket - function: core->createTicket

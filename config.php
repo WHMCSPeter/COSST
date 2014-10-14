@@ -32,6 +32,13 @@ $system_url = $core->Setting('system_url');
 //Set the language.
 require_once('assets/lang/lang.'.$language.'.php');
 
+//Check if Maintenance Mode is enabled. If it is, redirect every page to /maintenance
+$maintenance = $core->maintenanceModeCheck();
+if($maintenance) {
+	header("Location: ".$system_url."maintenance");
+	die();
+}
+
 //Work out if logged in and define variables if so.
 if(isset($_COOKIE['loggedin']) && isset($_COOKIE['id']) && isset($_COOKIE['sechash'])) {
 	if($core->checkLoggedIn($core->EscapeString($_COOKIE['id']), $core->EscapeString($_COOKIE['sechash']))) {

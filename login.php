@@ -13,7 +13,7 @@ if(isset($_POST['login'])) {
 	$password = sha1($_POST['password']);
 	$login = $core->Login($email, $password);
 	if($login == true) {
-		header("Location: ./");
+		header("Location: ".$system_url);
 		die();
 	}
 	else if($login == false)

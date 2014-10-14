@@ -18,6 +18,7 @@ if(!LOGGED_IN) {
     <?php require_once('assets/inc/inc.nav.php'); ?>
 
     <div class="container">
+    <?php if(!isset($_POST['open-ticket'])) { ?>
       <div class="row">
       	<div class="col-md-12">
         	<h1>Open a Ticket</h1>
@@ -96,8 +97,28 @@ if(!LOGGED_IN) {
         </div>
       </div>
       </div>
-    
-      
+      <?php } else {
+		  $create = $core->createTicket($user_id, $_POST['dept'], '1', $_POST['subject'], $_POST['message'], $_SERVER['REMOTE_ADDR']);
+		  if(!$create) {
+			  header("Location: ./error?code=createticket");
+			  die();
+		  }
+		  else
+		  {
+		  ?>
+    		<div class="row">
+            	<div class="col-md-12">
+                	<p class="page-header">Open a Ticket</p>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-6 col-md-offset-3">
+                	<p class="alert alert-success">Your ticket regarding "<strong><?php echo $create['subject'];?></strong>" has been created with the ID: <strong><?php echo $create['ticket_id']; ?></strong>. You may now <a href="./tickets/<?php echo $create['ticket_id']; ?>">click here to view it</a>.</p>
+                </div>
+            </div>
+      <?php }
+	  }
+	  ?>
       <hr>
 
       <footer>
