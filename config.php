@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost'; //The hostname/IP of your MySQL server.
 $dbuser = 'root'; //The username to connect to your database.
-$dbpw = '123456'; //The password to connect to your database.
+$dbpw = 'qw72110929'; //The password to connect to your database.
 $database = 'cosst'; //The name of your database.
 
 //Error reporting - Comment out this line for debugging purposes.

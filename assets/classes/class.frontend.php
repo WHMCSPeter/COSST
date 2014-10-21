@@ -90,14 +90,14 @@ class Frontend {
 		else
 		{
 			while($row = $commit->fetch_assoc()) {
-				echo '<a href="categories/'.$row['slug'].'">'.$row['name'].'</a><br>';
+				echo '<a href="knowledgebase/categories/'.$row['slug'].'">'.$row['name'].'</a><br>';
 			}
 		}
 	}
 	
 	function featured_kb($limit = '') {
 		global $MySQLi;
-		$query = "SELECT * FROM kb_articles LIMIT ".$limit."";
+		$query = "SELECT * FROM kb_articles ORDER BY rand() LIMIT ".$limit."";
 		$commit = $MySQLi->query($query);
 		if($commit == false) {
 			trigger_error("Could not retrieve KB articles. Please contact support.");
@@ -107,7 +107,7 @@ class Frontend {
 			while($row = $commit->fetch_assoc()) {
 				echo '<div class="panel panel-default">';
 				echo '<div class="panel-heading">';
-				echo '<h3 class="panel-title"><strong>'.$row['title'].'</strong> <span>'.$this->kbCategoryByID($row['category']).'</span></h3>';
+				echo '<h3 class="panel-title"><a href="knowledgebase/article/'.$row['id'].'"><strong>'.$row['title'].'</strong></a> <span><a href="knowledgebase/categories/'.$this->kbCategoryInfoByID($row['category'], 'slug').'">'.$this->kbCategoryInfoByID($row['category'], 'name').'</a></span></h3>';
 				echo '</div>';
 				echo '<div class="panel-body">';
 				echo substr($row['body'], 0, 255);
@@ -121,7 +121,7 @@ class Frontend {
 		}
 	}
 	
-	function kbCategoryByID($id = '') {
+	function kbCategoryInfoByID($id = '', $col = '') {
 		global $MySQLi;
 		$query = "SELECT * FROM kb_categories WHERE id = '".$id."' LIMIT 1";
 		$commit = $MySQLi->query($query);
@@ -131,7 +131,69 @@ class Frontend {
 		else
 		{
 			$row = $commit->fetch_array();
-			return $row['name'];
+			return $row[$col];
+		}
+	}
+	
+	function displayKBCategory($slug = '') {
+		global $MySQLi;
+		$query = "SELECT * FROM kb_categories WHERE slug = '".$slug."' LIMIT 1";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not locate category. Please contact support.");
+		}
+		else
+		{
+			$count = $commit->num_rows;
+			if($count == 0) {
+				return false;
+			}
+			else
+			{
+				$row = $commit->fetch_array();
+				$cat = $row['id'];
+				$query1 = "SELECT * FROM kb_articles WHERE category = '".$cat."'";
+				$commit1 = $MySQLi->query($query1);
+				if($commit1 == false) {
+					trigger_error("Could not retrieve articles");
+				}
+				else
+				{
+					$count1 = $commit1->num_rows;
+					if($count1 == 0) {
+						echo '<p class="alert alert-danger"><strong>Error:</strong> There are currently no articles in this category.</p>';
+						return true;
+					}
+					else
+					{
+						echo 'Category stuff!';
+						echo $count1;
+						echo $cat;
+						return true;
+					}
+				}
+			}
+		}
+	}
+	
+	function categoryInfo($slug = '', $col = '') {
+		global $MySQLi;
+		$query = "SELECT * FROM kb_categories WHERE slug = '".$slug."' LIMIT 1";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve category info. Please contact support.");
+		}
+		else
+		{
+			$count = $commit->num_rows;
+			if($count == 0) {
+				return false;
+			}
+			else
+			{
+				$row = $commit->fetch_array();
+				return $row[$col];
+			}
 		}
 	}
 }

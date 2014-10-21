@@ -14,6 +14,10 @@ $page = 'knowledgebase';
     <?php require_once('assets/inc/inc.nav.php'); ?>
 
     <div class="container">
+    <?php
+	if(!isset($_GET['article']) && !isset($_GET['category']))
+	{
+	?>
     	<div class="row">
         	<div class="col-md-12">
         		<h1 class="page-header">Knowledgebase <small>Answers to frequently asked questions...</small></h1>
@@ -31,13 +35,36 @@ $page = 'knowledgebase';
                 	<div class="input-group">
                     	<span class="input-group-addon">Search</span>
                         <input type="text" class="form-control" name="term" placeholder="What do you need help with?" />
+                        <span class="input-group-btn">
+        					<input type="submit" class="btn btn-default" name="search" value="Search Now">
+      					</span>
                     </div>
                 </form>
-                <br>
-                <?php $frontend->featured_kb(3); ?>
+                <h2><small>Random Articles</small></h2>
+                <?php $frontend->featured_kb($core->Setting('kb_featured')); ?>
             </div>
         </div>
-
+        <?php
+	}
+	else if(isset($_GET['category'])) {
+		$category = $core->EscapeString($_GET['category']);
+		$cat = $frontend->categoryInfo($category, 'name');
+		if(!$cat) {
+			header("Location: ".$system_url."knowledgebase");
+			die();
+		}
+	?>
+    <div class="row">
+    	<div class="col-md-12">
+        	<h1 class="page-header">Knowledgebase <small><?php echo $cat; ?></small></h1>
+        </div>
+    </div>
+    <?php
+	}
+	else if(isset($_GET['article'])) {
+		echo 'Show article';
+	}
+	?>
       <hr>
 
       <footer>
