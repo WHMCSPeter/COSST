@@ -46,17 +46,17 @@ $page = 'home';
         <div class="col-md-4">
           <h2><?php echo $lang['heading1']; ?></h2>
           <p><?php echo $lang['subtext1']; ?></p>
-          <p><a class="btn btn-default" href="#" role="button"><?php echo $lang['linktext1']; ?> &raquo;</a></p>
+          <p><a class="btn btn-default" href="knowledgebase" role="button"><?php echo $lang['linktext1']; ?> &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2><?php echo $lang['heading2']; ?></h2>
           <p><?php echo $lang['subtext2']; ?></p>
-          <p><a class="btn btn-default" href="#" role="button"><?php echo $lang['linktext2']; ?> &raquo;</a></p>
+          <p><a class="btn btn-default" href="announcements" role="button"><?php echo $lang['linktext2']; ?> &raquo;</a></p>
        </div>
         <div class="col-md-4">
           <h2><?php echo $lang['heading3']; ?></h2>
           <p><?php echo $lang['subtext3']; ?></p>
-          <p><a class="btn btn-default" href="#" role="button"><?php echo $lang['linktext3']; ?> &raquo;</a></p>
+          <p><a class="btn btn-default" href="status" role="button"><?php echo $lang['linktext3']; ?> &raquo;</a></p>
         </div>
       </div>
 

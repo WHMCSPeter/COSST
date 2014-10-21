@@ -32,23 +32,30 @@ class Tickets {
 		}
 		else
 		{
-			while($row = $commit->fetch_assoc()) {
-				$class = $this->StatusByID($row['status'], 'class');
-				$updated = strtotime($row['last_updated']);
-				$date = date('h:iA - d/m/Y', $updated);
-				if($class != NULL) {
-					echo '<tr class="'.$class.'">';
+			$count = $commit->num_rows;
+			if($count != 0) {
+				while($row = $commit->fetch_assoc()) {
+					$class = $this->StatusByID($row['status'], 'class');
+					$updated = strtotime($row['last_updated']);
+					$date = date('h:iA - d/m/Y', $updated);
+					if($class != NULL) {
+						echo '<tr class="'.$class.'">';
+					}
+					else
+					{
+						echo '<tr>';
+					}
+					echo '<td><a href="./tickets/'.$row['ticket_id'].'">'.$row['ticket_id'].'</a></td>';
+					echo '<td>'.$row['subject'].'</td>';
+					echo '<td>'.$this->DepartmentByID($row['dept_id']).'</td>';
+					echo '<td>'.$this->StatusByID($row['status'], 'name').'</td>';
+					echo '<td>'.$date.'</td>';
+					echo '<td><a href="./tickets/'.$row['ticket_id'].'">View</a></td>';
 				}
-				else
-				{
-					echo '<tr>';
-				}
-				echo '<td><a href="./tickets/'.$row['ticket_id'].'">'.$row['ticket_id'].'</a></td>';
-				echo '<td>'.$row['subject'].'</td>';
-				echo '<td>'.$this->DepartmentByID($row['dept_id']).'</td>';
-				echo '<td>'.$this->StatusByID($row['status'], 'name').'</td>';
-				echo '<td>'.$date.'</td>';
-				echo '<td><a href="">Close</a></td>';
+			}
+			else
+			{
+				echo '<td colspan="6"><center><strong>No tickets found.</strong></center></td>';
 			}
 		}
 	}
@@ -235,7 +242,8 @@ class Tickets {
 	
 	function statusUpdate($tid = '', $status_id = '', $by = '') {
 		global $MySQLi;
-		$query = "UPDATE tickets SET status = '".$status_id."' WHERE ticket_id = '".$tid."' LIMIT 1";
+		$created = date('Y-m-d H:i:s');
+		$query = "UPDATE tickets SET status = '".$status_id."', last_updated = '".$created."' WHERE ticket_id = '".$tid."' LIMIT 1";
 		$query1 = "INSERT INTO `responses` (`ticket_id`, `created`, `message`) VALUES ('".$tid."', '".date('Y-m-d H:i:s')."', 'Ticket marked as \"".$this->StatusByID($status_id, 'name')."\" by ".$this->submitterDetails($by, 'first_name', false)." ".$this->submitterDetails($by, 'last_name', false).".')";
 		$commit = $MySQLi->query($query);
 		$commit1 = $MySQLi->query($query1);
@@ -259,7 +267,15 @@ class Tickets {
 		}
 		else
 		{
-			return true;
+			$query1 = "UPDATE tickets SET status = '4', last_updated = '".$created."' WHERE ticket_id = '".$tid."' LIMIT 1";
+			$commit1 = $MySQLi->query($query1);
+			if($commit1 == false) {
+				trigger_error("Could not update ticket status.");	
+			}
+			else
+			{
+				return true;
+			}
 		}
 	}
 }

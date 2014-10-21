@@ -70,7 +70,7 @@ if(!LOGGED_IN) {
                         <th>Department</th>
                         <th>Status</th>
                         <th>Last Updated</th>
-                        <th>Close</th>
+                        <th>View</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,6 +106,7 @@ if(!LOGGED_IN) {
 				$ticket_id = $tickets->ticketInfo($tid, 'ticket_id');
 				$dept = $tickets->DepartmentByID($tickets->ticketInfo($tid, 'dept_id'));
 				$status_id = $tickets->ticketInfo($tid, 'status');
+				$updated = strtotime($tickets->ticketInfo($tid, 'last_updated'));
 			?>
             <form role="form">
               <div class="form-group">
@@ -119,6 +120,10 @@ if(!LOGGED_IN) {
               <div class="form-group">
                 <label for="status">Status</label>
                 <input type="text" class="form-control" id="status" placeholder="<?php echo $tickets->StatusByID($status_id, 'name'); ?>" disabled />
+              </div>
+              <div class="form-group">
+                <label for="status">Last Updated</label>
+                <input type="text" class="form-control" id="status" placeholder="<?php echo date('d M Y - H:i', $updated); ?>" disabled />
               </div>
             </form>
             <?php

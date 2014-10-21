@@ -24,3 +24,11 @@ td a {
 	padding: 7px 15px;
 	float: right;
 }
+
+.well {
+	padding: 0 0 20px 19px;
+}
+
+.panel-heading span {
+	padding: 0;
+}

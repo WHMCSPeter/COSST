@@ -79,5 +79,60 @@ class Frontend {
 			}
 		}
 	}
+	
+	function kb_categories() {
+		global $MySQLi;
+		$query = "SELECT * FROM kb_categories WHERE hidden = '0'";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve KB categories. Please contact support.");
+		}
+		else
+		{
+			while($row = $commit->fetch_assoc()) {
+				echo '<a href="categories/'.$row['slug'].'">'.$row['name'].'</a><br>';
+			}
+		}
+	}
+	
+	function featured_kb($limit = '') {
+		global $MySQLi;
+		$query = "SELECT * FROM kb_articles LIMIT ".$limit."";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve KB articles. Please contact support.");
+		}
+		else
+		{
+			while($row = $commit->fetch_assoc()) {
+				echo '<div class="panel panel-default">';
+				echo '<div class="panel-heading">';
+				echo '<h3 class="panel-title"><strong>'.$row['title'].'</strong> <span>'.$this->kbCategoryByID($row['category']).'</span></h3>';
+				echo '</div>';
+				echo '<div class="panel-body">';
+				echo substr($row['body'], 0, 255);
+				if(strlen($row['body']) > 255) {
+					echo '...';
+				}
+				echo '<a href="#" style="float: right;"><button class="btn btn-sm btn-primary">Read More...</button></a>';
+				echo '</div>';
+				echo '</div>';
+			}
+		}
+	}
+	
+	function kbCategoryByID($id = '') {
+		global $MySQLi;
+		$query = "SELECT * FROM kb_categories WHERE id = '".$id."' LIMIT 1";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrive category name. Please contact support.");
+		}
+		else
+		{
+			$row = $commit->fetch_array();
+			return $row['name'];
+		}
+	}
 }
 ?>
