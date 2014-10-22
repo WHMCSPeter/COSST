@@ -26,9 +26,13 @@ td a {
 }
 
 .well {
-	padding: 0 0 20px 19px;
+	padding: 0 20px 15px 15px;
 }
 
 .panel-heading span {
 	padding: 0;
+}
+
+.well > h3 {
+	text-align: center;
 }

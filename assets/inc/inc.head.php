@@ -6,6 +6,7 @@
 
 <link href="<?php echo $system_url; ?>assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo $system_url; ?>assets/css/style.css" rel="stylesheet">
+<script src="<?php echo $system_url; ?>assets/js/app.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

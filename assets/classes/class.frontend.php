@@ -237,5 +237,40 @@ class Frontend {
 			}
 		}
 	}
+	
+	function statusCheck() {
+		global $MySQLi;
+		$query = "SELECT * FROM status_ports WHERE hidden = '0'";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve port listings.");
+		}
+		else
+		{
+			$report = array();
+			$svcs = array();
+			$hosts = array();
+			while($row = $commit->fetch_assoc()) {
+				$svcs[$row['name']] = $row['port'];
+				$hosts[$row['name']] = $row['host'];
+			}
+			foreach ($svcs as $service=>$port) {
+				$report[$service] = ["check" => $this->check_port($hosts[$service], $port), "host" => $hosts[$service], "port" => $port];
+			}
+			return $report;
+		}
+	}
+	
+	function check_port($host = '', $port = '') {
+		$conn = @fsockopen($host, $port, $errno, $errstr, 2);
+		if ($conn) {
+			fclose($conn);
+			return "1";
+		}
+		else
+		{
+			return "0";
+		}
+	}
 }
 ?>
