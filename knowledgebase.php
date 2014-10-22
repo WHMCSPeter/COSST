@@ -15,7 +15,7 @@ $page = 'knowledgebase';
 
     <div class="container">
     <?php
-	if(!isset($_GET['article']) && !isset($_GET['category']))
+	if(!isset($_GET['article']) && !isset($_GET['category']) && !isset($_GET['search']))
 	{
 	?>
     	<div class="row">
@@ -27,16 +27,16 @@ $page = 'knowledgebase';
         <div class="row">
         	<div class="col-md-2 well">
             	<h3>Categories</h3>
-                <?php $frontend->kb_categories(); ?>         
+                <?php $frontend->kb_categories($system_url); ?>      
             </div>
         
         	<div class="col-md-10">
-        		<form>
+        		<form action="<?php echo $system_url.'knowledgebase/search/submit'; ?>" method="post">
                 	<div class="input-group">
                     	<span class="input-group-addon">Search</span>
-                        <input type="text" class="form-control" name="term" placeholder="What do you need help with?" />
+                        <input type="text" class="form-control" name="search" placeholder="What do you need help with?" />
                         <span class="input-group-btn">
-        					<input type="submit" class="btn btn-default" name="search" value="Search Now">
+        					<input type="submit" class="btn btn-default" value="Search Now">
       					</span>
                     </div>
                 </form>
@@ -59,10 +59,37 @@ $page = 'knowledgebase';
         	<h1 class="page-header">Knowledgebase <small><?php echo $cat; ?></small></h1>
         </div>
     </div>
+    
+    <div class="row">
+      	<div class="col-md-2 well">
+        	<h3>Categories</h3>
+            <?php $frontend->kb_categories($system_url); ?>
+            <br>
+            <a href="<?php echo $system_url.'knowledgebase'; ?>"><button class="btn btn-info">&laquo; Back</button></a>       
+        </div>
+        
+      	<div class="col-md-10">
+       		<form action="<?php echo $system_url.'knowledgebase/search/submit'; ?>" method="post">
+               	<div class="input-group">
+                  	<span class="input-group-addon">Search</span>
+                    <input type="text" class="form-control" name="search" placeholder="What do you need help with?" />
+                    <span class="input-group-btn">
+   					<input type="submit" class="btn btn-default" value="Search Now">
+   					</span>
+                </div>
+            </form>
+            <br>
+            <?php $frontend->displayKBCategory($category); ?>
+            </div>
+        </div>
     <?php
 	}
 	else if(isset($_GET['article'])) {
 		echo 'Show article';
+	}
+	else if(isset($_GET['search'])) {
+		echo '%'.str_replace(" ","%",$_POST['search']).'%';
+		//Use above formula in search
 	}
 	?>
       <hr>

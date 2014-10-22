@@ -36,7 +36,7 @@ $page = 'home';
 			echo 'You have '.$open.' open tickets, '.$awaiting_response.' awaiting your response and '.$resolved.' resolved tickets.';
 		}
 		?></p>
-        <p><a class="btn btn-primary btn-lg" role="button"><?php echo $lang['kb_link']; ?> &raquo;</a></p>
+        <p><a href="knowledgebase" class="btn btn-primary btn-lg" role="button"><?php echo $lang['kb_link']; ?> &raquo;</a></p>
       </div>
     </div>
 

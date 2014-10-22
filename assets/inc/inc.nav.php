@@ -10,10 +10,10 @@ if(!LOGGED_IN) {
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="./"><?php echo $sitename; ?></a>
+        <a class="navbar-brand" href="<?php echo $system_url; ?>"><?php echo $sitename; ?></a>
       </div>
       <div class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right" action="<?php echo $system_url; ?>/login" method="post" role="form">
+        <form class="navbar-form navbar-right" action="<?php echo $system_url; ?>login" method="post" role="form">
           <div class="form-group">
             <input type="email" placeholder="<?php echo $lang['placeholder_email']; ?>" name="email" class="form-control" required />
           </div>
@@ -40,7 +40,7 @@ else
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="./"><?php echo $sitename; ?></a>
+        <a class="navbar-brand" href="<?php echo $system_url; ?>"><?php echo $sitename; ?></a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">

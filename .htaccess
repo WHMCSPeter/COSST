@@ -6,4 +6,5 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^tickets/([^/]+) /tickets.php?tid=$1 [NC]
 RewriteRule ^knowledgebase/categories/([^/]+) /knowledgebase.php?category=$1 [NC]
 RewriteRule ^knowledgebase/article/([^/]+) /knowledgebase.php?article=$1 [NC]
+RewriteRule ^knowledgebase/search/([^/]+) /knowledgebase.php?search=$1 [NC]
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

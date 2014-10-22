@@ -80,9 +80,9 @@ class Frontend {
 		}
 	}
 	
-	function kb_categories() {
+	function kb_categories($url = '') {
 		global $MySQLi;
-		$query = "SELECT * FROM kb_categories WHERE hidden = '0'";
+		$query = "SELECT * FROM kb_categories WHERE hidden = '0' ORDER BY name";
 		$commit = $MySQLi->query($query);
 		if($commit == false) {
 			trigger_error("Could not retrieve KB categories. Please contact support.");
@@ -90,7 +90,7 @@ class Frontend {
 		else
 		{
 			while($row = $commit->fetch_assoc()) {
-				echo '<a href="knowledgebase/categories/'.$row['slug'].'">'.$row['name'].'</a><br>';
+				echo '<a href="'.$url.'knowledgebase/categories/'.$row['slug'].'">'.$row['name'].'</a><br>';
 			}
 		}
 	}
@@ -161,14 +161,29 @@ class Frontend {
 				{
 					$count1 = $commit1->num_rows;
 					if($count1 == 0) {
+						echo '<div class="row">';
+						echo '<div class="col-md-8 col-md-offset-2">';
 						echo '<p class="alert alert-danger"><strong>Error:</strong> There are currently no articles in this category.</p>';
+						echo '</div>';
+						echo '</div>';
 						return true;
 					}
 					else
 					{
-						echo 'Category stuff!';
-						echo $count1;
-						echo $cat;
+						while($row = $commit1->fetch_assoc()) {
+							echo '<div class="panel panel-default">';
+							echo '<div class="panel-heading">';
+							echo '<h3 class="panel-title"><a href="knowledgebase/article/'.$row['id'].'"><strong>'.$row['title'].'</strong></a> <span><a href="knowledgebase/categories/'.$this->kbCategoryInfoByID($row['category'], 'slug').'">'.$this->kbCategoryInfoByID($row['category'], 'name').'</a></span></h3>';
+							echo '</div>';
+							echo '<div class="panel-body">';
+							echo substr($row['body'], 0, 255);
+							if(strlen($row['body']) > 255) {
+								echo '...';
+							}
+							echo '<a href="#" style="float: right;"><button class="btn btn-sm btn-primary">Read More...</button></a>';
+							echo '</div>';
+							echo '</div>';
+						}
 						return true;
 					}
 				}
@@ -193,6 +208,32 @@ class Frontend {
 			{
 				$row = $commit->fetch_array();
 				return $row[$col];
+			}
+		}
+	}
+	
+	function kbCategoryList($slug = '') {
+		global $MySQLi;
+		$query = "SELECT * FROM kb_articles WHERE category = '".$this->categoryInfo($slug, 'id')."'";
+		$commit = $MySQLi->query($query);
+		if($commit == false) {
+			trigger_error("Could not retrieve KB articles. Please contact support.");
+		}
+		else
+		{
+			while($row = $commit->fetch_assoc()) {
+				echo '<div class="panel panel-default">';
+				echo '<div class="panel-heading">';
+				echo '<h3 class="panel-title"><a href="knowledgebase/article/'.$row['id'].'"><strong>'.$row['title'].'</strong></a> <span><a href="knowledgebase/categories/'.$this->kbCategoryInfoByID($row['category'], 'slug').'">'.$this->kbCategoryInfoByID($row['category'], 'name').'</a></span></h3>';
+				echo '</div>';
+				echo '<div class="panel-body">';
+				echo substr($row['body'], 0, 255);
+				if(strlen($row['body']) > 255) {
+					echo '...';
+				}
+				echo '<a href="#" style="float: right;"><button class="btn btn-sm btn-primary">Read More...</button></a>';
+				echo '</div>';
+				echo '</div>';
 			}
 		}
 	}
